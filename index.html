@@ -62,21 +62,34 @@
             }
         }
 
-        /* 🕸️ ПАВУТИНА У КУТКАХ */
-        .web-corner {
+        /* 🕸️ SVG ПАВУТИНА У КУТКАХ (ДЕТАЛІЗОВАНА ЯК НА РЕФЕРЕНСІ) */
+        .web-corner-svg {
             position: absolute;
-            font-size: clamp(2.5rem, 4vw, 4rem);
-            opacity: 0.35;
+            width: clamp(140px, 22vw, 260px);
+            height: clamp(140px, 22vw, 260px);
             pointer-events: none;
-            z-index: 2;
-            line-height: 1;
+            z-index: 8;
+            opacity: 0.75;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.2));
         }
-        .web-tl { top: 6px; left: 6px; }
-        .web-tr { top: 6px; right: 6px; transform: scaleX(-1); }
-        .web-bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
-        .web-br { bottom: 6px; right: 6px; transform: scale(-1); }
 
-        /* 👻 УНІВЕРСАЛЬНІ АНІМОВАНІ ЖАХАСТИКИ ПО ВСЬОМУ ЕКРАНУ (Z-INDEX: 1) */
+        .web-svg-tl { top: 0; left: 0; }
+        .web-svg-tr { top: 0; right: 0; transform: scaleX(-1); }
+        .web-svg-bl { bottom: 0; left: 0; transform: scaleY(-1); }
+        .web-svg-br { bottom: 0; right: 0; transform: scale(-1); }
+
+        /* 🕷️ АНІМАЦІЯ ПОКАЧУВАННЯ ПАВУКА НА НИТЦІ */
+        .spider-dangle {
+            transform-origin: top center;
+            animation: spiderSwing 3.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes spiderSwing {
+            0% { transform: rotate(-6deg); }
+            100% { transform: rotate(6deg); }
+        }
+
+        /* 👻 УНІВЕРСАЛЬНІ АНІМОВАНІ ЖАХАСТИКИ (Z-INDEX: 1) */
         .spooky-item {
             position: absolute;
             pointer-events: none;
@@ -430,301 +443,34 @@
 </head>
 <body>
 
-    <!-- 🕸️ ПАВУТИНА У КУТКАХ -->
-    <div class="web-corner web-tl">🕸️</div>
-    <div class="web-corner web-tr">🕸️</div>
-    <div class="web-corner web-bl">🕸️</div>
-    <div class="web-corner web-br">🕸️</div>
-
-    <!-- 👻 КОНТЕЙНЕР ДЛЯ ДИНАМІЧНОГО СПАВНУ ЖАХАСТИКІВ ПО ВСЬОМУ ЕКРАНУ -->
-    <div id="spookyBackground"></div>
-
-    <header>
-        <h1 class="bloody-title">TRICK OR TREAT 🎃🩸</h1>
-        <p class="subtitle">Крути зловісне колесо та вигравай знижки!</p>
-    </header>
-
-    <div class="attempts-badge" id="attemptsBadge">Залишилось спроб: 3 / 3 🔮</div>
-
-    <div class="wheel-container">
-        <div class="pointer-box">
-            <div class="eye-ball"><div class="eye-pupil"></div></div>
-            <div class="pointer-arrow"></div>
-        </div>
-
-        <canvas id="wheel" width="800" height="800"></canvas>
-        <div class="center-cap">💀</div>
-    </div>
-
-    <button class="spin-btn" id="spinBtn" onclick="spinWheel()">КРУТИТИ КОЛЕСО ⚡</button>
-
-    <div class="modal-overlay" id="modal">
-        <div class="modal-card">
-            <button class="close-x-btn" onclick="closeModal()">✕</button>
-            <h2 id="modalTitle" class="bloody-title" style="font-size: 1.8rem;">Зловісне колесо! 👻</h2>
-            <p id="modalText">Текст результату...</p>
+    <!-- 🕸️ ДЕТАЛІЗОВАНЕ SVG ПАВУТИННЯ З ПАВУЧКОМ ПО КУТАХ (ЯК НА РЕФЕРЕНСІ) -->
+    <!-- Верхній лівий кут -->
+    <svg class="web-corner-svg web-svg-tl" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="rgba(255,255,255,0.7)" stroke-width="1.5" fill="none">
+            <!-- Основні промені павутиння -->
+            <line x1="0" y1="0" x2="200" y2="0" />
+            <line x1="0" y1="0" x2="0" y2="200" />
+            <line x1="0" y1="0" x2="190" y2="70" />
+            <line x1="0" y1="0" x2="150" y2="150" />
+            <line x1="0" y1="0" x2="70" y2="190" />
             
-            <div class="promo-container" id="promoContainer">
-                <div id="promoBox" class="promo-code-box">SPOOKY5</div>
-                <button class="copy-btn" id="copyBtn" onclick="copyPromoCode()">
-                    <span>📋 Скопіювати промокод</span>
-                </button>
-            </div>
-            
-            <div class="modal-actions">
-                <button class="modal-btn" id="modalMainBtn" onclick="closeModal()">Продовжити 🔮</button>
-            </div>
-        </div>
-    </div>
+            <!-- Поперечні дуги натягу -->
+            <path d="M 40,0 Q 38,38 0,40" />
+            <path d="M 80,0 Q 75,75 0,80" />
+            <path d="M 120,0 Q 110,110 0,120" />
+            <path d="M 160,0 Q 145,145 0,160" />
+            <path d="M 200,0 Q 180,180 0,200" />
 
-    <script>
-        // 👻 ГЕНЕРАЦІЯ 32 ЖАХАСТИКІВ ПО ВСІЙ ПЛОЩІ ЕКРАНА
-        const spookyContainer = document.getElementById('spookyBackground');
-        const spookyEmojis = [
-            '🦇','👻','🎃','💀','😈','🧛‍♂️','🧟‍♂️','🧪','🧙‍♂️',
-            '🐈‍⬛','🕯️','🔮','👹','👁️','🪦','🧹','🕷️','🩸',
-            '🦴','🕸️','⚰️','🧙‍♀️','⛓️','📜'
-        ];
+            <path d="M 40,0 Q 38,15 48,18 Q 20,40 0,40" />
+            <path d="M 80,0 Q 75,35 95,35 Q 50,80 0,80" />
+            <path d="M 120,0 Q 110,50 140,55 Q 70,120 0,120" />
+        </g>
 
-        for (let i = 0; i < 32; i++) {
-            const el = document.createElement('div');
-            el.className = 'spooky-item';
-            el.innerText = spookyEmojis[i % spookyEmojis.length];
-
-            // Випадкове розташування по всій площі (від 2% до 94%)
-            const topPos = Math.floor(Math.random() * 92) + 2;
-            const leftPos = Math.floor(Math.random() * 92) + 2;
-            const animDuration = (Math.random() * 6 + 5).toFixed(1); // 5s - 11s
-            const delay = (Math.random() * 4).toFixed(1);
-
-            el.style.top = `${topPos}%`;
-            el.style.left = `${leftPos}%`;
-            el.style.animationDuration = `${animDuration}s`;
-            el.style.animationDelay = `-${delay}s`;
-
-            if (i % 2 === 0) {
-                el.style.animationDirection = 'alternate-reverse';
-            }
-
-            spookyContainer.appendChild(el);
-        }
-
-        // 🎯 ЛОГІКА КОЛЕСА
-        const canvas = document.getElementById('wheel');
-        const ctx = canvas.getContext('2d');
-        const spinBtn = document.getElementById('spinBtn');
-        const modal = document.getElementById('modal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalText = document.getElementById('modalText');
-        const promoContainer = document.getElementById('promoContainer');
-        const promoBox = document.getElementById('promoBox');
-        const copyBtn = document.getElementById('copyBtn');
-        const modalMainBtn = document.getElementById('modalMainBtn');
-        const attemptsBadge = document.getElementById('attemptsBadge');
-
-        const sectors = [
-            { id: 'lose1', text: "Вкусив упир", emoji: "🧛‍♂️", color: "#180928", textColor: "#4ade80" },
-            { id: 'discount5', text: "Знижка 5%", emoji: "🎃", color: "#ef4444", textColor: "#ffffff" },
-            { id: 'lose2', text: "Привид вкрав", emoji: "👻", color: "#052e16", textColor: "#22c55e" },
-            { id: 'discount7', text: "Знижка 7%", emoji: "👁️", color: "#a855f7", textColor: "#ffffff" },
-            { id: 'freeBeer', text: "Бокал пива", emoji: "🍺", color: "#eab308", textColor: "#022c22" },
-            { id: 'discount10', text: "Знижка 10%", emoji: "🏆", color: "#22c55e", textColor: "#022c22" },
-            { id: 'lose4', text: "Забрав відьмак", emoji: "🧙‍♂️", color: "#7f1d1d", textColor: "#fca5a5" },
-            { id: 'lose5', text: "Павук у кулі", emoji: "🕷️", color: "#0f051a", textColor: "#4ade80" }
-        ];
-
-        const numSectors = sectors.length;
-        const arc = (2 * Math.PI) / numSectors;
-        let totalRotation = 0;
-
-        let currentAttempt = parseInt(localStorage.getItem('hw_wheel_attempts') || '0');
-        let savedWin = localStorage.getItem('hw_wheel_win');
-
-        function updateAttemptsUI() {
-            const left = Math.max(0, 3 - currentAttempt);
-            attemptsBadge.innerText = `Залишилось спроб: ${left} / 3 🔮`;
-
-            if (currentAttempt >= 3) {
-                spinBtn.disabled = true;
-                spinBtn.innerText = "Спроби вичерпано 🔒";
-            }
-        }
-
-        function drawWheel() {
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const radius = canvas.width / 2 - 15;
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            for (let i = 0; i < numSectors; i++) {
-                const angle = i * arc;
-                
-                ctx.beginPath();
-                ctx.fillStyle = sectors[i].color;
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(centerX, centerY, radius, angle, angle + arc);
-                ctx.lineTo(centerX, centerY);
-                ctx.fill();
-                ctx.strokeStyle = '#05020a';
-                ctx.lineWidth = 6;
-                ctx.stroke();
-
-                ctx.save();
-                ctx.translate(centerX, centerY);
-                ctx.rotate(angle + arc / 2);
-                
-                ctx.textAlign = "center";
-                ctx.fillStyle = sectors[i].textColor;
-
-                const textFontSize = Math.round(canvas.width * 0.032);
-                const emojiFontSize = Math.round(canvas.width * 0.03);
-
-                ctx.font = `bold ${textFontSize}px 'Segoe UI', sans-serif`;
-                ctx.fillText(sectors[i].text, radius * 0.58, -4);
-
-                ctx.font = `${emojiFontSize}px 'Segoe UI', sans-serif`;
-                ctx.fillText(sectors[i].emoji, radius * 0.58, textFontSize + 4);
-
-                ctx.restore();
-            }
-        }
-
-        drawWheel();
-        updateAttemptsUI();
-
-        if (currentAttempt >= 3 && savedWin) {
-            setTimeout(() => {
-                const winData = JSON.parse(savedWin);
-                if (winData.type === 'beer') {
-                    showBeerWinModal();
-                } else {
-                    showWinModal(winData.discount, winData.code);
-                }
-            }, 500);
-        }
-
-        function spinWheel() {
-            if (currentAttempt >= 3) return;
-
-            spinBtn.disabled = true;
-
-            currentAttempt++;
-            localStorage.setItem('hw_wheel_attempts', currentAttempt);
-            updateAttemptsUI();
-
-            let targetSectorIndex;
-
-            if (currentAttempt < 3) {
-                const loseIndices = [0, 2, 6, 7];
-                targetSectorIndex = loseIndices[Math.floor(Math.random() * loseIndices.length)];
-            } else {
-                const rand = Math.random() * 100;
-                if (rand < 40) {
-                    targetSectorIndex = 1; // Знижка 5% (40%)
-                } else if (rand < 70) {
-                    targetSectorIndex = 3; // Знижка 7% (30%)
-                } else if (rand < 85) {
-                    targetSectorIndex = 5; // Знижка 10% (15%)
-                } else {
-                    targetSectorIndex = 4; // Бокал пива (15%)
-                }
-            }
-
-            const fullSpins = 5;
-            const sectorAngle = arc;
-            const targetSectorCenter = targetSectorIndex * sectorAngle + sectorAngle / 2;
-            const targetAngle = (3 * Math.PI / 2) - targetSectorCenter;
-
-            const currentMod = totalRotation % (2 * Math.PI);
-            let distanceToTarget = targetAngle - currentMod;
-            if (distanceToTarget < 0) {
-                distanceToTarget += 2 * Math.PI;
-            }
-
-            const rotationStep = (2 * Math.PI * fullSpins) + distanceToTarget;
-            totalRotation += rotationStep;
-
-            canvas.style.transform = `rotate(${totalRotation}rad)`;
-
-            setTimeout(() => {
-                handleSpinResult(sectors[targetSectorIndex]);
-            }, 4600);
-        }
-
-        function handleSpinResult(sector) {
-            const fullName = `${sector.text} ${sector.emoji}`;
-
-            if (currentAttempt < 3) {
-                modalTitle.innerText = "Trick or Treat! 👻";
-                modalText.innerHTML = `Вам випало: <strong>${fullName}</strong>.<br>Невдача! Але в тебе ще є спроба!`;
-                promoContainer.style.display = 'none';
-                modalMainBtn.innerText = "Спробувати ще 🔄";
-                modalMainBtn.onclick = closeModal;
-                modal.classList.add('active');
-            } else {
-                if (sector.id === 'freeBeer') {
-                    localStorage.setItem('hw_wheel_win', JSON.stringify({ type: 'beer' }));
-                    showBeerWinModal();
-                } else {
-                    let discount = "5%";
-                    let encodedCode = "U1BPT0tZNQ=="; // SPOOKY5
-
-                    if (sector.id === 'discount7') {
-                        discount = "7%";
-                        encodedCode = "VFJJQ0tZNw=="; // TRICKY7
-                    } else if (sector.id === 'discount10') {
-                        discount = "10%";
-                        encodedCode = "VFJFQVQxMA=="; // TREAT10
-                    }
-
-                    const promoCode = atob(encodedCode);
-                    localStorage.setItem('hw_wheel_win', JSON.stringify({ type: 'promo', discount, code: promoCode }));
-                    showWinModal(discount, promoCode);
-                }
-            }
-        }
-
-        function showWinModal(discount, promoCode) {
-            modalTitle.innerText = "TREAT WIN! 🎃🏆";
-            modalText.innerHTML = `Темні сили прихильні до тебе!<br>Твій виграш: <strong>Знижка ${discount}</strong> на набір пива або лимонадів!`;
-            promoBox.innerText = promoCode;
-            promoContainer.style.display = 'flex';
-            
-            copyBtn.classList.remove('copied');
-            copyBtn.innerHTML = '<span>📋 Скопіювати промокод</span>';
-
-            modalMainBtn.innerText = "Застосувати в Магазині 🍻";
-            modalMainBtn.onclick = () => {
-                window.open("https://underwood.beer/", "_blank");
-            };
-            modal.classList.add('active');
-        }
-
-        function showBeerWinModal() {
-            modalTitle.innerText = "БЕЗКОШТОВНИЙ КЕЛИХ! 🍺🎃";
-            modalText.innerHTML = `Вам випав <strong>безкоштовний келих пива на розлив</strong>!<br><br>📸 <strong>Зробіть скріншот цього екрану</strong> та покажіть його на касі в закладі <strong>Underwood Drinks Boutique</strong>, щоб забрати свій подарунок!`;
-            promoContainer.style.display = 'none';
-
-            modalMainBtn.innerText = "Зрозуміло 🍻";
-            modalMainBtn.onclick = closeModal;
-            modal.classList.add('active');
-        }
-
-        function copyPromoCode() {
-            const codeText = promoBox.innerText;
-            navigator.clipboard.writeText(codeText).then(() => {
-                copyBtn.classList.add('copied');
-                copyBtn.innerHTML = '<span>✅ Скопійовано!</span>';
-            });
-        }
-
-        function closeModal() {
-            modal.classList.remove('active');
-            if (currentAttempt < 3) {
-                spinBtn.disabled = false;
-            }
-        }
-    </script>
-</body>
-</html>
+        <!-- Нитка з павучком -->
+        <g class="spider-dangle">
+            <line x1="110" y1="50" x2="110" y2="110" stroke="rgba(255,255,255,0.5)" stroke-width="1" />
+            <!-- Павук -->
+            <circle cx="110" cy="115" r="5" fill="#180928" stroke="#ef4444" stroke-width="1" />
+            <circle cx="110" cy="111" r="3" fill="#180928" stroke="#ef4444" stroke-width="1" />
+            <!-- Лапки -->
+            <path d="M 105,113 Q 98,108 95,115 M 105,115 Q 96,115 94,120 M 115,113 Q 122,108 125,115 M 115,115 Q 124,115 126,120" stroke="#ef4444"
