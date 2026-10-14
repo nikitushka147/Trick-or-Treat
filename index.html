@@ -24,17 +24,19 @@
                 radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.3) 0%, transparent 50%);
             color: #fff;
             min-height: 100vh;
+            height: auto;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 12px;
-            overflow: hidden;
+            padding: 16px 12px 28px 12px;
+            overflow-x: hidden;
+            overflow-y: auto; /* Скрол з'являється за необхідності */
             position: relative;
             gap: 12px;
         }
 
-        /* 🩸 КРИВАВИЙ ЗАГОЛОВОК С ПУЛЬСАЦІЄЮ */
+        /* 🩸 КРИВАВИЙ ЗАГОЛОВОК З ПУЛЬСАЦІЄЮ */
         .bloody-title {
             font-family: "Creepster", cursive, sans-serif !important;
             color: #dc2626 !important;
@@ -436,7 +438,7 @@
     <div class="web-corner web-bl">🕸️</div>
     <div class="web-corner web-br">🕸️</div>
 
-    <!-- 👻 КОНТЕЙНЕР ДЛЯ ДИНАМІЧНОГО СПАВНУ ЖАХАСТИКІВ ПО ВСЬОМУ ЕКРАНУ -->
+    <!-- 👻 КОНТЕЙНЕР ДЛЯ ДИНАМІЧНОГО СПАВНУ ЖАХАСТИКІВ ПО ВСІЙ ПЛОЩІ ЕКРАНА -->
     <div id="spookyBackground"></div>
 
     <header>
@@ -491,10 +493,9 @@
             el.className = 'spooky-item';
             el.innerText = spookyEmojis[i % spookyEmojis.length];
 
-            // Випадкове розташування по всій площі (від 2% до 94%)
             const topPos = Math.floor(Math.random() * 92) + 2;
             const leftPos = Math.floor(Math.random() * 92) + 2;
-            const animDuration = (Math.random() * 6 + 5).toFixed(1); // 5s - 11s
+            const animDuration = (Math.random() * 6 + 5).toFixed(1);
             const delay = (Math.random() * 4).toFixed(1);
 
             el.style.top = `${topPos}%`;
