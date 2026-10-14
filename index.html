@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Underwood - Trick or Treat Wheel 🎃👻</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            background: #030108;
+            background-image: 
+                radial-gradient(circle at 50% 15%, rgba(239, 68, 68, 0.45) 0%, transparent 55%),
+                radial-gradient(circle at 15% 85%, rgba(34, 197, 94, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.3) 0%, transparent 50%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 12px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            gap: 12px;
+        }
+
+        /* 🩸 КРИВАВИЙ ШРИФТ ЗАГОЛОВКА */
+        .bloody-title {
+            font-family: "Creepster", cursive, sans-serif !important;
+            color: #ff1e1e !important;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: clamp(2rem, 6vw, 3.6rem);
+            line-height: 1.1;
+            text-shadow: 
+                0 0 5px #ff0000,
+                0 0 12px #ff0000,
+                0 0 25px rgba(255, 0, 0, 0.8),
+                0 0 35px rgba(239, 68, 68, 0.6),
+                2px 3px 2px #000;
+            animation: bloodPulse 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes bloodPulse {
+            0% {
+                text-shadow: 
+                    0 0 5px #ff0000,
+                    0 0 10px #ff0000,
+                    0 0 20px rgba(255, 0, 0, 0.8),
+                    0 0 30px rgba(239, 68, 68, 0.6),
+                    2px 3px 2px #000;
+            }
+            100% {
+                text-shadow: 
+                    0 0 8px #ff2222,
+                    0 0 18px #ff0000,
+                    0 0 30px rgba(255, 0, 0, 1),
+                    0 0 45px rgba(34, 197, 94, 0.5),
+                    2px 4px 3px #000;
+            }
+        }
+
+        /* 🕸️ ПАВУТИНА */
+        .web-corner {
+            position: absolute;
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: 1;
+            line-height: 1;
+        }
+        .web-tl { top: 6px; left: 6px; }
+        .web-tr { top: 6px; right: 6px; transform: scaleX(-1); }
+        .web-bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
+        .web-br { bottom: 6px; right: 6px; transform: scale(-1); }
+
+        /* 👻 ЖАХАСТИКИ */
+        .spooky-float {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+            filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.8));
+            animation: floatAnim 5s ease-in-out infinite alternate;
+        }
+
+        .bat-1 { top: 12%; left: 6%; font-size: clamp(2rem, 3.5vw, 3.2rem); animation-duration: 4s; }
+        .bat-2 { top: 18%; right: 6%; font-size: clamp(2.2rem, 3.8vw, 3.5rem); animation-duration: 5.5s; }
+        .ghost-1 { bottom: 18%; left: 8%; font-size: clamp(2.4rem, 4vw, 3.8rem); animation-duration: 6.5s; }
+        .ghost-2 { top: 45%; right: 5%; font-size: clamp(2rem, 3.2vw, 3rem); animation-duration: 7s; }
+        .jack-1 { bottom: 10%; right: 12%; font-size: clamp(2.5rem, 4.2vw, 4rem); animation-duration: 4.8s; }
+        .jack-2 { top: 28%; left: 4%; font-size: clamp(2.2rem, 3.6vw, 3.2rem); animation-duration: 5.2s; }
+        .skel-1 { bottom: 28%; right: 8%; font-size: clamp(2rem, 3.5vw, 3.2rem); animation-duration: 6s; }
+        .smile-bg { top: 5%; font-size: clamp(3rem, 5vw, 5rem); animation-duration: 3.5s; }
+
+        @keyframes floatAnim {
+            0% { transform: translateY(0px) rotate(-6deg); opacity: 0.2; }
+            100% { transform: translateY(-22px) rotate(8deg); opacity: 0.45; }
+        }
+
+        header {
+            text-align: center;
+            z-index: 2;
+        }
+
+        p.subtitle {
+            color: #4ade80;
+            font-size: clamp(0.72rem, 2.6vw, 1.1rem);
+            text-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .attempts-badge {
+            background: rgba(239, 68, 68, 0.18);
+            border: 1px solid #ef4444;
+            color: #fca5a5;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: clamp(0.75rem, 2.2vw, 1rem);
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+            z-index: 2;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: min(80vw, 42vh, 340px);
+            height: min(80vw, 42vh, 340px);
+            margin: 8px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        @media (min-width: 768px) {
+            body { padding: 24px; gap: 16px; }
+            .wheel-container {
+                width: min(65vw, 52vh, 480px);
+                height: min(65vw, 52vh, 480px);
+            }
+            .eye-ball { width: 32px !important; height: 32px !important; }
+            .eye-pupil { width: 12px !important; height: 12px !important; }
+            .pointer-arrow {
+                border-left-width: 18px !important;
+                border-right-width: 18px !important;
+                border-top-width: 32px !important;
+            }
+            .pointer-box { top: -28px !important; }
+            .spin-btn {
+                max-width: 380px !important;
+                padding: 16px 36px !important;
+                font-size: 1.3rem !important;
+            }
+        }
+
+        /* 👁️ ОКО-ВКАЗІВНИК */
+        .pointer-box {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .eye-ball {
+            width: 26px;
+            height: 26px;
+            background: #ffffff;
+            border-radius: 50%;
+            border: 2px solid #ef4444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 10px #ef4444;
+            animation: eyeBlink 4s ease-in-out infinite;
+        }
+
+        .eye-pupil {
+            width: 10px;
+            height: 10px;
+            background: #7f1d1d;
+            border-radius: 50%;
+            border: 2px solid #000;
+            animation: pupilLook 3s ease-in-out infinite;
+        }
+
+        @keyframes eyeBlink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            93% { transform: scaleY(0.1); }
+        }
+        @keyframes pupilLook {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-3px, -2px); }
+            50% { transform: translate(3px, 0); }
+            75% { transform: translate(0, 2px); }
+        }
+
+        .pointer-arrow {
+            width: 0;
+            height: 0;
+            border-left: 14px solid transparent;
+            border-right: 14px solid transparent;
+            border-top: 26px solid #ef4444;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.8));
+            margin-top: -4px;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.5), 0 0 18px rgba(34, 197, 94, 0.4), inset 0 0 15px rgba(0,0,0,0.9);
+            transition: transform 4.5s cubic-bezier(0.15, 0.9, 0.1, 1);
+        }
+
+        .center-cap {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 42px;
+            height: 42px;
+            background: #090312;
+            border: 3px solid #22c55e;
+            border-radius: 50%;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+        }
+
+        .spin-btn {
+            background: linear-gradient(135deg, #ef4444, #22c55e);
+            color: #fff;
+            font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+            font-weight: 900;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 18px rgba(239, 68, 68, 0.6);
+            transition: all 0.2s ease;
+            width: 90%;
+            max-width: 320px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+            margin-bottom: 8px;
+        }
+
+        .spin-btn:hover:not(:disabled) {
+            transform: scale(1.03);
+            box-shadow: 0 0 22px rgba(34, 197, 94, 0.8);
+        }
+
+        .spin-btn:disabled {
+            background: #271428;
+            color: #6b586e;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* МОДАЛЬНЕ ВІКНО */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(3, 1, 8, 0.92);
+            backdrop-filter: blur(6px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 15px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            position: relative;
+            background: #0f051a;
+            border: 2px solid #22c55e;
+            color: #fff;
+            padding: 24px 20px;
+            border-radius: 18px;
+            text-align: center;
+            max-width: 380px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.4), 0 0 15px rgba(239, 68, 68, 0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .close-x-btn {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .modal-card p {
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            line-height: 1.35;
+        }
+
+        .promo-container {
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .promo-code-box {
+            background: #180928;
+            border: 2px dashed #22c55e;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #4ade80;
+            letter-spacing: 2px;
+        }
+
+        .copy-btn {
+            background: #22c55e;
+            color: #05020a;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .copy-btn.copied {
+            background: #3b82f6;
+            color: #ffffff;
+        }
+
+        .modal-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .modal-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 11px 14px;
+            border-radius: 22px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="web-corner web-tl">🕸️</div>
+    <div class="web-corner web-tr">🕸️</div>
+    <div class="web-corner web-bl">🕸️</div>
+    <div class="web-corner web-br">🕸️</div>
+
+    <div class="spooky-float bat-1">🦇</div>
+    <div class="spooky-float bat-2">🦇</div>
+    <div class="spooky-float ghost-1">👻</div>
+    <div class="spooky-float ghost-2">👻</div>
+    <div class="spooky-float jack-1">🎃</div>
+    <div class="spooky-float jack-2">🎃</div>
+    <div class="spooky-float skel-1">💀</div>
+    <div class="spooky-float smile-bg">😈</div>
+
+    <header>
+        <h1 class="bloody-title">TRICK OR TREAT 🎃🩸</h1>
+        <p class="subtitle">Крути зловісне колесо та вигравай знижки!</p>
+    </header>
+
+    <div class="attempts-badge" id="attemptsBadge">Залишилось спроб: 3 / 3 🔮</div>
+
+    <div class="wheel-container">
+        <div class="pointer-box">
+            <div class="eye-ball"><div class="eye-pupil"></div></div>
+            <div class="pointer-arrow"></div>
+        </div>
+
+        <canvas id="wheel" width="800" height="800"></canvas>
+        <div class="center-cap">💀</div>
+    </div>
+
+    <button class="spin-btn" id="spinBtn" onclick="spinWheel()">КРУТИТИ КОЛЕСО ⚡</button>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal-card">
+            <button class="close-x-btn" onclick="closeModal()">✕</button>
+            <h2 id="modalTitle" class="bloody-title" style="font-size: 1.8rem;">Зловісне колесо! 👻</h2>
+            <p id="modalText">Текст результату...</p>
+            
+            <div class="promo-container" id="promoContainer">
+                <div id="promoBox" class="promo-code-box">SPOOKY5</div>
+                <button class="copy-btn" id="copyBtn" onclick="copyPromoCode()">
+                    <span>📋 Скопіювати промокод</span>
+                </button>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="modal-btn" id="modalMainBtn" onclick="closeModal()">Продовжити 🔮</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('wheel');
+        const ctx = canvas.getContext('2d');
+        const spinBtn = document.getElementById('spinBtn');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalText = document.getElementById('modalText');
+        const promoContainer = document.getElementById('promoContainer');
+        const promoBox = document.getElementById('promoBox');
+        const copyBtn = document.getElementById('copyBtn');
+        const modalMainBtn = document.getElementById('modalMainBtn');
+        const attemptsBadge = document.getElementById('attemptsBadge');
+
+        const sectors = [
+            { id: 'lose1', text: "Вкусив упир", emoji: "🧛‍♂️", color: "#180928", textColor: "#4ade80" },
+            { id: 'discount5', text: "Знижка 5%", emoji: "🎃", color: "#ef4444", textColor: "#ffffff" },
+            { id: 'lose2', text: "Привид вкрав", emoji: "👻", color: "#052e16", textColor: "#22c55e" },
+            { id: 'discount7', text: "Знижка 7%", emoji: "👁️", color: "#a855f7", textColor: "#ffffff" },
+            { id: 'freeBeer', text: "Бокал пива", emoji: "🍺", color: "#eab308", textColor: "#022c22" },
+            { id: 'discount10', text: "Знижка 10%", emoji: "🏆", color: "#22c55e", textColor: "#022c22" },
+            { id: 'lose4', text: "Забрав відьмак", emoji: "🧙‍♂️", color: "#7f1d1d", textColor: "#fca5a5" },
+            { id: 'lose5', text: "Павук у кулі", emoji: "🕷️", color: "#0f051a", textColor: "#4ade80" }
+        ];
+
+        const numSectors = sectors.length;
+        const arc = (2 * Math.PI) / numSectors;
+        let totalRotation = 0;
+
+        let currentAttempt = parseInt(localStorage.getItem('hw_wheel_attempts') || '0');
+        let savedWin = localStorage.getItem('hw_wheel_win');
+
+        function updateAttemptsUI() {
+            const left = Math.max(0, 3 - currentAttempt);
+            attemptsBadge.innerText = `Залишилось спроб: ${left} / 3 🔮`;
+
+            if (currentAttempt >= 3) {
+                spinBtn.disabled = true;
+                spinBtn.innerText = "Спроби вичерпано 🔒";
+            }
+        }
+
+        function drawWheel() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = canvas.width / 2 - 15;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < numSectors; i++) {
+                const angle = i * arc;
+                
+                ctx.beginPath();
+                ctx.fillStyle = sectors[i].color;
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, angle, angle + arc);
+                ctx.lineTo(centerX, centerY);
+                ctx.fill();
+                ctx.strokeStyle = '#05020a';
+                ctx.lineWidth = 6;
+                ctx.stroke();
+
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.rotate(angle + arc / 2);
+                
+                ctx.textAlign = "center";
+                ctx.fillStyle = sectors[i].textColor;
+
+                const textFontSize = Math.round(canvas.width * 0.032);
+                const emojiFontSize = Math.round(canvas.width * 0.03);
+
+                ctx.font = `bold ${textFontSize}px 'Segoe UI', sans-serif`;
+                ctx.fillText(sectors[i].text, radius * 0.58, -4);
+
+                ctx.font = `${emojiFontSize}px 'Segoe UI', sans-serif`;
+                ctx.fillText(sectors[i].emoji, radius * 0.58, textFontSize + 4);
+
+                ctx.restore();
+            }
+        }
+
+        drawWheel();
+        updateAttemptsUI();
+
+        if (currentAttempt >= 3 && savedWin) {
+            setTimeout(() => {
+                const winData = JSON.parse(savedWin);
+                if (winData.type === 'beer') {
+                    showBeerWinModal();
+                } else {
+                    showWinModal(winData.discount, winData.code);
+                }
+            }, 500);
+        }
+
+        function spinWheel() {
+            if (currentAttempt >= 3) return;
+
+            spinBtn.disabled = true;
+
+            currentAttempt++;
+            localStorage.setItem('hw_wheel_attempts', currentAttempt);
+            updateAttemptsUI();
+
+            let targetSectorIndex;
+
+            if (currentAttempt < 3) {
+                const loseIndices = [0, 2, 6, 7];
+                targetSectorIndex = loseIndices[Math.floor(Math.random() * loseIndices.length)];
+            } else {
+                const rand = Math.random() * 100;
+                if (rand < 40) {
+                    targetSectorIndex = 1; // Знижка 5% (40%)
+                } else if (rand < 70) {
+                    targetSectorIndex = 3; // Знижка 7% (30%)
+                } else if (rand < 85) {
+                    targetSectorIndex = 5; // Знижка 10% (15%)
+                } else {
+                    targetSectorIndex = 4; // Бокал пива (15%)
+                }
+            }
+
+            const fullSpins = 5;
+            const sectorAngle = arc;
+            const targetSectorCenter = targetSectorIndex * sectorAngle + sectorAngle / 2;
+            const targetAngle = (3 * Math.PI / 2) - targetSectorCenter;
+
+            const currentMod = totalRotation % (2 * Math.PI);
+            let distanceToTarget = targetAngle - currentMod;
+            if (distanceToTarget < 0) {
+                distanceToTarget += 2 * Math.PI;
+            }
+
+            const rotationStep = (2 * Math.PI * fullSpins) + distanceToTarget;
+            totalRotation += rotationStep;
+
+            canvas.style.transform = `rotate(${totalRotation}rad)`;
+
+            setTimeout(() => {
+                handleSpinResult(sectors[targetSectorIndex]);
+            }, 4600);
+        }
+
+        function handleSpinResult(sector) {
+            const fullName = `${sector.text} ${sector.emoji}`;
+
+            if (currentAttempt < 3) {
+                modalTitle.innerText = "Trick or Treat! 👻";
+                modalText.innerHTML = `Вам випало: <strong>${fullName}</strong>.<br>Невдача! Але в тебе ще є спроба!`;
+                promoContainer.style.display = 'none';
+                modalMainBtn.innerText = "Спробувати ще 🔄";
+                modalMainBtn.onclick = closeModal;
+                modal.classList.add('active');
+            } else {
+                if (sector.id === 'freeBeer') {
+                    localStorage.setItem('hw_wheel_win', JSON.stringify({ type: 'beer' }));
+                    showBeerWinModal();
+                } else {
+                    let discount = "5%";
+                    let encodedCode = "U1BPT0tZNQ=="; // SPOOKY5
+
+                    if (sector.id === 'discount7') {
+                        discount = "7%";
+                        encodedCode = "VFJJQ0tZNw=="; // TRICKY7
+                    } else if (sector.id === 'discount10') {
+                        discount = "10%";
+                        encodedCode = "VFJFQVQxMA=="; // TREAT10
+                    }
+
+                    const promoCode = atob(encodedCode);
+                    localStorage.setItem('hw_wheel_win', JSON.stringify({ type: 'promo', discount, code: promoCode }));
+                    showWinModal(discount, promoCode);
+                }
+            }
+        }
+
+        function showWinModal(discount, promoCode) {
+            modalTitle.innerText = "TREAT WIN! 🎃🏆";
+            modalText.innerHTML = `Темні сили прихильні до тебе!<br>Твій виграш: <strong>Знижка ${discount}</strong> на набір пива або лимонадів!`;
+            promoBox.innerText = promoCode;
+            promoContainer.style.display = 'flex';
+            
+            copyBtn.classList.remove('copied');
+            copyBtn.innerHTML = '<span>📋 Скопіювати промокод</span>';
+
+            modalMainBtn.innerText = "Застосувати в Магазині 🍻";
+            modalMainBtn.onclick = () => {
+                window.open("https://underwood.beer/", "_blank");
+            };
+            modal.classList.add('active');
+        }
+
+        function showBeerWinModal() {
+            modalTitle.innerText = "БЕЗКОШТОВНИЙ КЕЛИХ! 🍺🎃";
+            modalText.innerHTML = `Вам випав <strong>безкоштовний келих пива на розлив</strong>!<br><br>📸 <strong>Зробіть скріншот цього екрану</strong> та покажіть його на касі в закладі <strong>Underwood Drinks Boutique</strong>, щоб забрати свій подарунок!`;
+            promoContainer.style.display = 'none';
+
+            modalMainBtn.innerText = "Зрозуміло 🍻";
+            modalMainBtn.onclick = closeModal;
+            modal.classList.add('active');
+        }
+
+        function copyPromoCode() {
+            const codeText = promoBox.innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                copyBtn.classList.add('copied');
+                copyBtn.innerHTML = '<span>✅ Скопійовано!</span>';
+            });
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            if (currentAttempt < 3) {
+                spinBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
