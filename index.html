@@ -29,12 +29,13 @@
             justify-content: space-between;
             align-items: center;
             padding: 16px 12px;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             position: relative;
             gap: 12px;
         }
 
-        /* 🩸 КРИВАВИЙ ЗАГОЛОВОК */
+        /* 🩸 КРИВАВИЙ ЗАГОЛОВОК З ПОСИЛЕНОЮ ПУЛЬСАЦІЄЮ */
         .bloody-title {
             font-family: "Creepster", cursive, sans-serif !important;
             color: #dc2626 !important;
@@ -76,61 +77,49 @@
         .web-bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
         .web-br { bottom: 6px; right: 6px; transform: scale(-1); }
 
-        /* 👻 ЖАХАСТИКИ (Z-INDEX: 1 — ПРОЛІТАЮТЬ ЗА КОЛЕСОМ І КНОПКОЮ ПО ВСЬОМУ ЕКРАНУ) */
+        /* 👻 ЖАХАСТИКИ (Z-INDEX: 1 — ПРОЛІТАЮТЬ ЗА КОЛЕСОМ, КНОПКОЮ ТА ТЕКСТОМ) */
         .spooky-float {
             position: absolute;
             pointer-events: none;
-            z-index: 1;
-            opacity: 0.45;
+            z-index: 1; /* Опустили нижче за інтерфейс */
+            opacity: 0.4;
             filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.8));
-            animation: floatFullArea 10s ease-in-out infinite alternate;
+            animation: floatAcrossScreen 8s ease-in-out infinite alternate;
         }
 
-        /* РІЗНОМАНІТНІ ШВИДКОСТІ ТА НАПРЯМКИ ДЛЯ 30+ ЖАХАСТИКІВ */
-        .sp-1  { top: 5%;  left: 5%;  font-size: 2.8rem; animation-duration: 7s; }
-        .sp-2  { top: 12%; left: 85%; font-size: 3.2rem; animation-duration: 9s; animation-direction: alternate-reverse; }
-        .sp-3  { top: 20%; left: 45%; font-size: 2.6rem; animation-duration: 8s; }
-        .sp-4  { top: 28%; left: 15%; font-size: 3.0rem; animation-duration: 11s; animation-direction: alternate-reverse; }
-        .sp-5  { top: 35%; left: 75%; font-size: 3.4rem; animation-duration: 6.5s; }
-        .sp-6  { top: 42%; left: 5%;  font-size: 2.7rem; animation-duration: 10s; }
-        .sp-7  { top: 50%; left: 90%; font-size: 3.1rem; animation-duration: 8.5s; animation-direction: alternate-reverse; }
-        .sp-8  { top: 58%; left: 30%; font-size: 2.9rem; animation-duration: 7.5s; }
-        .sp-9  { top: 65%; left: 65%; font-size: 3.3rem; animation-duration: 9.5s; }
-        .sp-10 { top: 72%; left: 10%; font-size: 2.8rem; animation-duration: 12s; animation-direction: alternate-reverse; }
-        .sp-11 { top: 80%; left: 80%; font-size: 3.5rem; animation-duration: 7s; }
-        .sp-12 { top: 88%; left: 40%; font-size: 2.7rem; animation-duration: 10.5s; }
-        
-        .sp-13 { top: 8%;  left: 60%; font-size: 3.1rem; animation-duration: 8.2s; }
-        .sp-14 { top: 15%; left: 28%; font-size: 2.5rem; animation-duration: 6.8s; animation-direction: alternate-reverse; }
-        .sp-15 { top: 25%; left: 92%; font-size: 2.9rem; animation-duration: 9.2s; }
-        .sp-16 { top: 38%; left: 35%; font-size: 3.2rem; animation-duration: 11.5s; }
-        .sp-17 { top: 48%; left: 70%; font-size: 2.8rem; animation-duration: 7.8s; animation-direction: alternate-reverse; }
-        .sp-18 { top: 55%; left: 18%; font-size: 3.0rem; animation-duration: 8.8s; }
-        .sp-19 { top: 68%; left: 82%; font-size: 2.6rem; animation-duration: 10.2s; }
-        .sp-20 { top: 78%; left: 52%; font-size: 3.4rem; animation-duration: 6.2s; animation-direction: alternate-reverse; }
-        
-        .sp-21 { top: 3%;  left: 30%; font-size: 2.9rem; animation-duration: 9s; }
-        .sp-22 { top: 18%; left: 70%; font-size: 3.3rem; animation-duration: 7.4s; }
-        .sp-23 { top: 32%; left: 50%; font-size: 2.7rem; animation-duration: 10.8s; animation-direction: alternate-reverse; }
-        .sp-24 { top: 45%; left: 12%; font-size: 3.1rem; animation-duration: 8.6s; }
-        .sp-25 { top: 62%; left: 42%; font-size: 2.8rem; animation-duration: 6.9s; }
-        .sp-26 { top: 75%; left: 25%; font-size: 3.5rem; animation-duration: 11.2s; animation-direction: alternate-reverse; }
-        .sp-27 { top: 84%; left: 95%; font-size: 2.6rem; animation-duration: 8.1s; }
-        .sp-28 { top: 92%; left: 15%; font-size: 3.0rem; animation-duration: 9.7s; }
-        .sp-29 { top: 10%; left: 95%; font-size: 2.8rem; animation-duration: 7.3s; }
-        .sp-30 { top: 52%; left: 98%; font-size: 3.2rem; animation-duration: 10.1s; animation-direction: alternate-reverse; }
+        /* Позиціонування і траєкторії руху */
+        .bat-1 { top: 8%; left: 3%; font-size: 2.8rem; animation-duration: 5s; }
+        .bat-2 { top: 15%; right: 4%; font-size: 3rem; animation-duration: 6.5s; }
+        .ghost-1 { bottom: 12%; left: 5%; font-size: 3.2rem; animation-duration: 7s; }
+        .ghost-2 { top: 40%; right: 3%; font-size: 2.8rem; animation-duration: 8s; }
+        .jack-1 { bottom: 6%; right: 8%; font-size: 3.5rem; animation-duration: 5.8s; }
+        .jack-2 { top: 22%; left: 2%; font-size: 2.9rem; animation-duration: 6.2s; }
+        .skel-1 { bottom: 22%; right: 5%; font-size: 2.8rem; animation-duration: 7.2s; }
+        .smile-bg { top: 3%; left: 45%; font-size: 4rem; animation-duration: 4.5s; }
 
-        @keyframes floatFullArea {
+        /* 10 нових жахастиків */
+        .vampire-1 { top: 58%; left: 4%; font-size: 3.2rem; animation-duration: 6.8s; }
+        .ghoul-1 { top: 75%; right: 12%; font-size: 3.2rem; animation-duration: 6s; }
+        .potion-1 { top: 32%; left: 6%; font-size: 2.8rem; animation-duration: 5.2s; }
+        .witcher-1 { top: 48%; right: 6%; font-size: 3.3rem; animation-duration: 7.5s; }
+        .cat-1 { bottom: 35%; left: 2%; font-size: 3rem; animation-duration: 8.5s; }
+        .candle-1 { top: 68%; left: 12%; font-size: 2.6rem; animation-duration: 5.5s; }
+        .crystal-1 { top: 18%; left: 38%; font-size: 2.7rem; animation-duration: 6.4s; }
+        .monster-1 { bottom: 45%; right: 2%; font-size: 3.4rem; animation-duration: 7.8s; }
+        .eyeball-1 { top: 82%; left: 35%; font-size: 2.5rem; animation-duration: 4.8s; }
+        .tomb-1 { bottom: 4%; left: 22%; font-size: 3rem; animation-duration: 6.9s; }
+
+        @keyframes floatAcrossScreen {
             0% {
-                transform: translate(-40px, -30px) rotate(-12deg) scale(0.9);
+                transform: translate(0, 0) rotate(-8deg);
                 opacity: 0.3;
             }
             50% {
-                transform: translate(60px, 40px) rotate(10deg) scale(1.1);
-                opacity: 0.65;
+                transform: translate(30px, -25px) rotate(6deg);
+                opacity: 0.55;
             }
             100% {
-                transform: translate(-50px, 60px) rotate(-8deg) scale(0.95);
+                transform: translate(-20px, 20px) rotate(-4deg);
                 opacity: 0.35;
             }
         }
@@ -149,7 +138,7 @@
             margin-top: 4px;
         }
 
-        /* 🔮 ПЛАШКА СПРОБ З ПУЛЬСАЦІЄЮ */
+        /* 🔮 ПЛАШКА СПРОБ З ПОСИЛЕНОЮ ПУЛЬСАЦІЄЮ */
         .attempts-badge {
             background: rgba(239, 68, 68, 0.22);
             border: 1px solid #ef4444;
@@ -173,7 +162,7 @@
             }
         }
 
-        /* 🎯 КОНТЕЙНЕР КОЛЕСА З ПІДСВІТКОЮ */
+        /* 🎯 КОНТЕЙНЕР КОЛЕСА З ВЕЛИКОЮ ПУЛЬСУЮЧОЮ ПІДСВІТКОЮ */
         .wheel-container {
             position: relative;
             width: min(80vw, 42vh, 340px);
@@ -182,7 +171,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 5;
+            z-index: 5; /* Щоб жахастики проходили позаду */
             border-radius: 50%;
             animation: intenseWheelGlow 2.5s ease-in-out infinite alternate;
         }
@@ -209,4 +198,542 @@
                 border-right-width: 18px !important;
                 border-top-width: 32px !important;
             }
-            .pointer-box { top: -
+            .pointer-box { top: -28px !important; }
+            .spin-btn {
+                max-width: 380px !important;
+                padding: 16px 36px !important;
+                font-size: 1.3rem !important;
+            }
+        }
+
+        /* 👁️ ОКО-ВКАЗІВНИК */
+        .pointer-box {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .eye-ball {
+            width: 26px;
+            height: 26px;
+            background: #ffffff;
+            border-radius: 50%;
+            border: 2px solid #ef4444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 12px #ef4444;
+            animation: eyeBlink 4s ease-in-out infinite;
+        }
+
+        .eye-pupil {
+            width: 10px;
+            height: 10px;
+            background: #7f1d1d;
+            border-radius: 50%;
+            border: 2px solid #000;
+            animation: pupilLook 3s ease-in-out infinite;
+        }
+
+        @keyframes eyeBlink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            93% { transform: scaleY(0.1); }
+        }
+        @keyframes pupilLook {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-3px, -2px); }
+            50% { transform: translate(3px, 0); }
+            75% { transform: translate(0, 2px); }
+        }
+
+        .pointer-arrow {
+            width: 0;
+            height: 0;
+            border-left: 14px solid transparent;
+            border-right: 14px solid transparent;
+            border-top: 26px solid #ef4444;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.8));
+            margin-top: -4px;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transition: transform 4.5s cubic-bezier(0.15, 0.9, 0.1, 1);
+        }
+
+        .center-cap {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 42px;
+            height: 42px;
+            background: #090312;
+            border: 3px solid #22c55e;
+            border-radius: 50%;
+            z-index: 6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+        }
+
+        /* ⚡ КНОПКА З ВЕЛИКОЮ ПУЛЬСУЮЧОЮ ПІДСВІТКОЮ */
+        .spin-btn {
+            background: linear-gradient(135deg, #ef4444, #22c55e);
+            color: #fff;
+            font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+            font-weight: 900;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 90%;
+            max-width: 320px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 5;
+            margin-bottom: 8px;
+            animation: intenseBtnGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes intenseBtnGlow {
+            0% { box-shadow: 0 0 14px rgba(239, 68, 68, 0.6); }
+            100% { box-shadow: 0 0 30px rgba(34, 197, 94, 0.95), 0 0 15px rgba(239, 68, 68, 0.8); }
+        }
+
+        .spin-btn:hover:not(:disabled) {
+            transform: scale(1.04);
+        }
+
+        .spin-btn:disabled {
+            background: #271428;
+            color: #6b586e;
+            cursor: not-allowed;
+            box-shadow: none;
+            animation: none;
+        }
+
+        /* МОДАЛЬНЕ ВІКНО */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(3, 1, 8, 0.92);
+            backdrop-filter: blur(6px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 15px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            position: relative;
+            background: #0f051a;
+            border: 2px solid #22c55e;
+            color: #fff;
+            padding: 24px 20px;
+            border-radius: 18px;
+            text-align: center;
+            max-width: 380px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.4), 0 0 15px rgba(239, 68, 68, 0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .close-x-btn {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .modal-card p {
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            line-height: 1.35;
+        }
+
+        .promo-container {
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .promo-code-box {
+            background: #180928;
+            border: 2px dashed #22c55e;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #4ade80;
+            letter-spacing: 2px;
+        }
+
+        .copy-btn {
+            background: #22c55e;
+            color: #05020a;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .copy-btn.copied {
+            background: #3b82f6;
+            color: #ffffff;
+        }
+
+        .modal-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .modal-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 11px 14px;
+            border-radius: 22px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🕸️ ПАВУТИНА -->
+    <div class="web-corner web-tl">🕸️</div>
+    <div class="web-corner web-tr">🕸️</div>
+    <div class="web-corner web-bl">🕸️</div>
+    <div class="web-corner web-br">🕸️</div>
+
+    <!-- 👻 БАГАТО АНІМОВАНИХ ЖАХАСТИКІВ (ПРОЛІТАЮТЬ ЗА ЕЛЕМЕНТАМИ) -->
+    <div class="spooky-float bat-1">🦇</div>
+    <div class="spooky-float bat-2">🦇</div>
+    <div class="spooky-float ghost-1">👻</div>
+    <div class="spooky-float ghost-2">👻</div>
+    <div class="spooky-float jack-1">🎃</div>
+    <div class="spooky-float jack-2">🎃</div>
+    <div class="spooky-float skel-1">💀</div>
+    <div class="spooky-float smile-bg">😈</div>
+    <div class="spooky-float vampire-1">🧛‍♂️</div>
+    <div class="spooky-float ghoul-1">🧟‍♂️</div>
+    <div class="spooky-float potion-1">🧪</div>
+    <div class="spooky-float witcher-1">🧙‍♂️</div>
+    
+    <!-- 10 НОВИХ ЖАХАСТИКІВ -->
+    <div class="spooky-float cat-1">🐈‍⬛</div>
+    <div class="spooky-float candle-1">🕯️</div>
+    <div class="spooky-float crystal-1">🔮</div>
+    <div class="spooky-float monster-1">👹</div>
+    <div class="spooky-float eyeball-1">👁️</div>
+    <div class="spooky-float tomb-1">🪦</div>
+
+    <header>
+        <h1 class="bloody-title">TRICK OR TREAT 🎃🩸</h1>
+        <p class="subtitle">Крути зловісне колесо та вигравай знижки!</p>
+    </header>
+
+    <div class="attempts-badge" id="attemptsBadge">Залишилось спроб: 3 / 3 🔮</div>
+
+    <div class="wheel-container">
+        <div class="pointer-box">
+            <div class="eye-ball"><div class="eye-pupil"></div></div>
+            <div class="pointer-arrow"></div>
+        </div>
+
+        <canvas id="wheel" width="800" height="800"></canvas>
+        <div class="center-cap">💀</div>
+    </div>
+
+    <button class="spin-btn" id="spinBtn" onclick="spinWheel()">КРУТИТИ КОЛЕСО ⚡</button>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal-card">
+            <button class="close-x-btn" onclick="closeModal()">✕</button>
+            <h2 id="modalTitle" class="bloody-title" style="font-size: 1.8rem;">Зловісне колесо! 👻</h2>
+            <p id="modalText">Текст результату...</p>
+            
+            <div class="promo-container" id="promoContainer">
+                <div id="promoBox" class="promo-code-box">SPOOKY5</div>
+                <button class="copy-btn" id="copyBtn" onclick="copyPromoCode()">
+                    <span>📋 Скопіювати промокод</span>
+                </button>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="modal-btn" id="modalMainBtn" onclick="closeModal()">Продовжити 🔮</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('wheel');
+        const ctx = canvas.getContext('2d');
+        const spinBtn = document.getElementById('spinBtn');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalText = document.getElementById('modalText');
+        const promoContainer = document.getElementById('promoContainer');
+        const promoBox = document.getElementById('promoBox');
+        const copyBtn = document.getElementById('copyBtn');
+        const modalMainBtn = document.getElementById('modalMainBtn');
+        const attemptsBadge = document.getElementById('attemptsBadge');
+
+        const sectors = [
+            { id: 'lose1', text: "Вкусив упир", emoji: "🧛‍♂️", color: "#180928", textColor: "#4ade80" },
+            { id: 'discount5', text: "Знижка 5%", emoji: "🎃", color: "#ef4444", textColor: "#ffffff" },
+            { id: 'lose2', text: "Привид вкрав", emoji: "👻", color: "#052e16", textColor: "#22c55e" },
+            { id: 'discount7', text: "Знижка 7%", emoji: "👁️", color: "#a855f7", textColor: "#ffffff" },
+            { id: 'freeBeer', text: "Бокал пива", emoji: "🍺", color: "#eab308", textColor: "#022c22" },
+            { id: 'discount10', text: "Знижка 10%", emoji: "🏆", color: "#22c55e", textColor: "#022c22" },
+            { id: 'lose4', text: "Забрав відьмак", emoji: "🧙‍♂️", color: "#7f1d1d", textColor: "#fca5a5" },
+            { id: 'lose5', text: "Павук у кулі", emoji: "🕷️", color: "#0f051a", textColor: "#4ade80" }
+        ];
+
+        const numSectors = sectors.length;
+        const arc = (2 * Math.PI) / numSectors;
+        let totalRotation = 0;
+
+        let currentAttempt = parseInt(localStorage.getItem('hw_wheel_attempts') || '0');
+        let savedWin = localStorage.getItem('hw_wheel_win');
+
+        function updateAttemptsUI() {
+            const left = Math.max(0, 3 - currentAttempt);
+            attemptsBadge.innerText = `Залишилось спроб: ${left} / 3 🔮`;
+
+            if (currentAttempt >= 3) {
+                spinBtn.disabled = true;
+                spinBtn.innerText = "Спроби вичерпано 🔒";
+            }
+        }
+
+        function drawWheel() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = canvas.width / 2 - 15;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < numSectors; i++) {
+                const angle = i * arc;
+                
+                ctx.beginPath();
+                ctx.fillStyle = sectors[i].color;
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, angle, angle + arc);
+                ctx.lineTo(centerX, centerY);
+                ctx.fill();
+                ctx.strokeStyle = '#05020a';
+                ctx.lineWidth = 6;
+                ctx.stroke();
+
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.rotate(angle + arc / 2);
+                
+                ctx.textAlign = "center";
+                ctx.fillStyle = sectors[i].textColor;
+
+                const textFontSize = Math.round(canvas.width * 0.032);
+                const emojiFontSize = Math.round(canvas.width * 0.03);
+
+                ctx.font = `bold ${textFontSize}px 'Segoe UI', sans-serif`;
+                ctx.fillText(sectors[i].text, radius * 0.58, -4);
+
+                ctx.font = `${emojiFontSize}px 'Segoe UI', sans-serif`;
+                ctx.fillText(sectors[i].emoji, radius * 0.58, textFontSize + 4);
+
+                ctx.restore();
+            }
+        }
+
+        drawWheel();
+        updateAttemptsUI();
+
+        if (currentAttempt >= 3 && savedWin) {
+            setTimeout(() => {
+                const winData = JSON.parse(savedWin);
+                if (winData.type === 'beer') {
+                    showBeerWinModal();
+                } else {
+                    showWinModal(winData.discount, winData.code);
+                }
+            }, 500);
+        }
+
+        function spinWheel() {
+            if (currentAttempt >= 3) return;
+
+            spinBtn.disabled = true;
+
+            currentAttempt++;
+            localStorage.setItem('hw_wheel_attempts', currentAttempt);
+            updateAttemptsUI();
+
+            let targetSectorIndex;
+
+            if (currentAttempt < 3) {
+                const loseIndices = [0, 2, 6, 7];
+                targetSectorIndex = loseIndices[Math.floor(Math.random() * loseIndices.length)];
+            } else {
+                const rand = Math.random() * 100;
+                if (rand < 40) {
+                    targetSectorIndex = 1; // Знижка 5% (40%)
+                } else if (rand < 70) {
+                    targetSectorIndex = 3; // Знижка 7% (30%)
+                } else if (rand < 85) {
+                    targetSectorIndex = 5; // Знижка 10% (15%)
+                } else {
+                    targetSectorIndex = 4; // Бокал пива (15%)
+                }
+            }
+
+            const fullSpins = 5;
+            const sectorAngle = arc;
+            const targetSectorCenter = targetSectorIndex * sectorAngle + sectorAngle / 2;
+            const targetAngle = (3 * Math.PI / 2) - targetSectorCenter;
+
+            const currentMod = totalRotation % (2 * Math.PI);
+            let distanceToTarget = targetAngle - currentMod;
+            if (distanceToTarget < 0) {
+                distanceToTarget += 2 * Math.PI;
+            }
+
+            const rotationStep = (2 * Math.PI * fullSpins) + distanceToTarget;
+            totalRotation += rotationStep;
+
+            canvas.style.transform = `rotate(${totalRotation}rad)`;
+
+            setTimeout(() => {
+                handleSpinResult(sectors[targetSectorIndex]);
+            }, 4600);
+        }
+
+        function handleSpinResult(sector) {
+            const fullName = `${sector.text} ${sector.emoji}`;
+
+            if (currentAttempt < 3) {
+                modalTitle.innerText = "Trick or Treat! 👻";
+                modalText.innerHTML = `Вам випало: <strong>${fullName}</strong>.<br>Невдача! Але в тебе ще є спроба!`;
+                promoContainer.style.display = 'none';
+                modalMainBtn.innerText = "Спробувати ще 🔄";
+                modalMainBtn.onclick = closeModal;
+                modal.classList.add('active');
+            } else {
+                if (sector.id === 'freeBeer') {
+                    localStorage.setItem('hw_wheel_win', JSON.stringify({ type: 'beer' }));
+                    showBeerWinModal();
+                } else {
+                    let discount = "5%";
+                    let encodedCode = "U1BPT0tZNQ=="; // SPOOKY5
+
+                    if (sector.id === 'discount7') {
+                        discount = "7%";
+                        encodedCode = "VFJJQ0tZNw=="; // TRICKY7
+                    } else if (sector.id === 'discount10') {
+                        discount = "10%";
+                        encodedCode = "VFJFQVQxMA=="; // TREAT10
+                    }
+
+                    const promoCode = atob(encodedCode);
+                    localStorage.setItem('hw_wheel_win', JSON.stringify({ type: 'promo', discount, code: promoCode }));
+                    showWinModal(discount, promoCode);
+                }
+            }
+        }
+
+        function showWinModal(discount, promoCode) {
+            modalTitle.innerText = "TREAT WIN! 🎃🏆";
+            modalText.innerHTML = `Темні сили прихильні до тебе!<br>Твій виграш: <strong>Знижка ${discount}</strong> на набір пива або лимонадів!`;
+            promoBox.innerText = promoCode;
+            promoContainer.style.display = 'flex';
+            
+            copyBtn.classList.remove('copied');
+            copyBtn.innerHTML = '<span>📋 Скопіювати промокод</span>';
+
+            modalMainBtn.innerText = "Застосувати в Магазині 🍻";
+            modalMainBtn.onclick = () => {
+                window.open("https://underwood.beer/", "_blank");
+            };
+            modal.classList.add('active');
+        }
+
+        function showBeerWinModal() {
+            modalTitle.innerText = "БЕЗКОШТОВНИЙ КЕЛИХ! 🍺🎃";
+            modalText.innerHTML = `Вам випав <strong>безкоштовний келих пива на розлив</strong>!<br><br>📸 <strong>Зробіть скріншот цього екрану</strong> та покажіть його на касі в закладі <strong>Underwood Drinks Boutique</strong>, щоб забрати свій подарунок!`;
+            promoContainer.style.display = 'none';
+
+            modalMainBtn.innerText = "Зрозуміло 🍻";
+            modalMainBtn.onclick = closeModal;
+            modal.classList.add('active');
+        }
+
+        function copyPromoCode() {
+            const codeText = promoBox.innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                copyBtn.classList.add('copied');
+                copyBtn.innerHTML = '<span>✅ Скопійовано!</span>';
+            });
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            if (currentAttempt < 3) {
+                spinBtn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
