@@ -35,39 +35,31 @@
             gap: 12px;
         }
 
-        /* 🩸 КРИВАВИЙ ШРИФТ ЗАГОЛОВКА */
+        /* 🩸 ЧИТАБЕЛЬНИЙ КРИВАВИЙ ЗАГОЛОВОК З ПУЛЬСАЦІЄЮ */
         .bloody-title {
             font-family: "Creepster", cursive, sans-serif !important;
-            color: #ff1e1e !important;
+            color: #dc2626 !important;
             text-transform: uppercase;
             letter-spacing: 3px;
-            font-size: clamp(2rem, 6vw, 3.6rem);
+            font-size: clamp(2.2rem, 6.5vw, 3.8rem);
             line-height: 1.1;
-            text-shadow: 
-                0 0 5px #ff0000,
-                0 0 12px #ff0000,
-                0 0 25px rgba(255, 0, 0, 0.8),
-                0 0 35px rgba(239, 68, 68, 0.6),
-                2px 3px 2px #000;
+            -webkit-text-stroke: 1px #450a0a;
             animation: bloodPulse 2.5s ease-in-out infinite alternate;
         }
 
         @keyframes bloodPulse {
             0% {
                 text-shadow: 
-                    0 0 5px #ff0000,
-                    0 0 10px #ff0000,
-                    0 0 20px rgba(255, 0, 0, 0.8),
-                    0 0 30px rgba(239, 68, 68, 0.6),
-                    2px 3px 2px #000;
+                    0 0 4px rgba(220, 38, 38, 0.9),
+                    0 0 10px rgba(185, 28, 28, 0.7),
+                    0 2px 4px #000000;
             }
             100% {
                 text-shadow: 
-                    0 0 8px #ff2222,
-                    0 0 18px #ff0000,
-                    0 0 30px rgba(255, 0, 0, 1),
-                    0 0 45px rgba(34, 197, 94, 0.5),
-                    2px 4px 3px #000;
+                    0 0 8px rgba(239, 68, 68, 1),
+                    0 0 18px rgba(220, 38, 38, 0.9),
+                    0 0 28px rgba(34, 197, 94, 0.4),
+                    0 3px 6px #000000;
             }
         }
 
@@ -85,28 +77,34 @@
         .web-bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
         .web-br { bottom: 6px; right: 6px; transform: scale(-1); }
 
-        /* 👻 ЖАХАСТИКИ */
+        /* 👻 БАГАТО АНІМОВАНИХ ЖАХАСТИКІВ (Вампіри, Упирі, Зілля, Відьмак) */
         .spooky-float {
             position: absolute;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.3;
-            filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.8));
+            opacity: 0.35;
+            filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.7));
             animation: floatAnim 5s ease-in-out infinite alternate;
         }
 
-        .bat-1 { top: 12%; left: 6%; font-size: clamp(2rem, 3.5vw, 3.2rem); animation-duration: 4s; }
-        .bat-2 { top: 18%; right: 6%; font-size: clamp(2.2rem, 3.8vw, 3.5rem); animation-duration: 5.5s; }
-        .ghost-1 { bottom: 18%; left: 8%; font-size: clamp(2.4rem, 4vw, 3.8rem); animation-duration: 6.5s; }
-        .ghost-2 { top: 45%; right: 5%; font-size: clamp(2rem, 3.2vw, 3rem); animation-duration: 7s; }
-        .jack-1 { bottom: 10%; right: 12%; font-size: clamp(2.5rem, 4.2vw, 4rem); animation-duration: 4.8s; }
-        .jack-2 { top: 28%; left: 4%; font-size: clamp(2.2rem, 3.6vw, 3.2rem); animation-duration: 5.2s; }
-        .skel-1 { bottom: 28%; right: 8%; font-size: clamp(2rem, 3.5vw, 3.2rem); animation-duration: 6s; }
-        .smile-bg { top: 5%; font-size: clamp(3rem, 5vw, 5rem); animation-duration: 3.5s; }
+        .bat-1 { top: 10%; left: 4%; font-size: clamp(2rem, 3.5vw, 3.2rem); animation-duration: 4s; }
+        .bat-2 { top: 16%; right: 5%; font-size: clamp(2.2rem, 3.8vw, 3.5rem); animation-duration: 5.5s; }
+        .ghost-1 { bottom: 18%; left: 6%; font-size: clamp(2.4rem, 4vw, 3.8rem); animation-duration: 6.5s; }
+        .ghost-2 { top: 42%; right: 4%; font-size: clamp(2rem, 3.2vw, 3rem); animation-duration: 7s; }
+        .jack-1 { bottom: 8%; right: 10%; font-size: clamp(2.5rem, 4.2vw, 4rem); animation-duration: 4.8s; }
+        .jack-2 { top: 26%; left: 3%; font-size: clamp(2.2rem, 3.6vw, 3.2rem); animation-duration: 5.2s; }
+        .skel-1 { bottom: 25%; right: 6%; font-size: clamp(2rem, 3.5vw, 3.2rem); animation-duration: 6s; }
+        .smile-bg { top: 4%; font-size: clamp(3rem, 5vw, 5rem); animation-duration: 3.5s; }
+        
+        /* 🧪 Нові жахастики */
+        .vampire-1 { top: 60%; left: 5%; font-size: clamp(2.2rem, 3.8vw, 3.5rem); animation-duration: 6.2s; }
+        .ghoul-1 { top: 72%; right: 14%; font-size: clamp(2.2rem, 3.8vw, 3.5rem); animation-duration: 5.8s; }
+        .potion-1 { top: 35%; left: 8%; font-size: clamp(2rem, 3.4vw, 3rem); animation-duration: 4.5s; }
+        .witcher-1 { top: 50%; right: 8%; font-size: clamp(2.3rem, 3.9vw, 3.6rem); animation-duration: 6.8s; }
 
         @keyframes floatAnim {
-            0% { transform: translateY(0px) rotate(-6deg); opacity: 0.2; }
-            100% { transform: translateY(-22px) rotate(8deg); opacity: 0.45; }
+            0% { transform: translateY(0px) rotate(-6deg); opacity: 0.25; }
+            100% { transform: translateY(-22px) rotate(8deg); opacity: 0.5; }
         }
 
         header {
@@ -122,6 +120,7 @@
             margin-top: 4px;
         }
 
+        /* 🔮 ПЛАШКА СПРОБ З ПУЛЬСАЦІЄЮ */
         .attempts-badge {
             background: rgba(239, 68, 68, 0.18);
             border: 1px solid #ef4444;
@@ -130,10 +129,16 @@
             border-radius: 20px;
             font-size: clamp(0.75rem, 2.2vw, 1rem);
             font-weight: bold;
-            box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
             z-index: 2;
+            animation: badgeGlow 2s ease-in-out infinite alternate;
         }
 
+        @keyframes badgeGlow {
+            0% { box-shadow: 0 0 6px rgba(239, 68, 68, 0.4); border-color: #ef4444; }
+            100% { box-shadow: 0 0 16px rgba(239, 68, 68, 0.9); border-color: #fca5a5; }
+        }
+
+        /* 🎯 КОНТЕЙНЕР КОЛЕСА З ПУЛЬСУЮЧОЮ ПІДСВІТКОЮ */
         .wheel-container {
             position: relative;
             width: min(80vw, 42vh, 340px);
@@ -143,6 +148,17 @@
             justify-content: center;
             align-items: center;
             z-index: 2;
+            border-radius: 50%;
+            animation: wheelGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes wheelGlow {
+            0% {
+                box-shadow: 0 0 18px rgba(239, 68, 68, 0.4), 0 0 12px rgba(34, 197, 94, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 32px rgba(239, 68, 68, 0.8), 0 0 24px rgba(34, 197, 94, 0.6);
+            }
         }
 
         @media (min-width: 768px) {
@@ -226,7 +242,6 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            box-shadow: 0 0 25px rgba(239, 68, 68, 0.5), 0 0 18px rgba(34, 197, 94, 0.4), inset 0 0 15px rgba(0,0,0,0.9);
             transition: transform 4.5s cubic-bezier(0.15, 0.9, 0.1, 1);
         }
 
@@ -248,6 +263,7 @@
             box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
         }
 
+        /* ⚡ КНОПКА З ПУЛЬСУЮЧОЮ ПІДСВІТКОЮ */
         .spin-btn {
             background: linear-gradient(135deg, #ef4444, #22c55e);
             color: #fff;
@@ -257,7 +273,6 @@
             border: none;
             border-radius: 30px;
             cursor: pointer;
-            box-shadow: 0 0 18px rgba(239, 68, 68, 0.6);
             transition: all 0.2s ease;
             width: 90%;
             max-width: 320px;
@@ -265,11 +280,16 @@
             letter-spacing: 1px;
             z-index: 2;
             margin-bottom: 8px;
+            animation: btnGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes btnGlow {
+            0% { box-shadow: 0 0 12px rgba(239, 68, 68, 0.5); }
+            100% { box-shadow: 0 0 24px rgba(34, 197, 94, 0.8); }
         }
 
         .spin-btn:hover:not(:disabled) {
             transform: scale(1.03);
-            box-shadow: 0 0 22px rgba(34, 197, 94, 0.8);
         }
 
         .spin-btn:disabled {
@@ -277,6 +297,7 @@
             color: #6b586e;
             cursor: not-allowed;
             box-shadow: none;
+            animation: none;
         }
 
         /* МОДАЛЬНЕ ВІКНО */
@@ -407,11 +428,13 @@
 </head>
 <body>
 
+    <!-- 🕸️ ПАВУТИНА -->
     <div class="web-corner web-tl">🕸️</div>
     <div class="web-corner web-tr">🕸️</div>
     <div class="web-corner web-bl">🕸️</div>
     <div class="web-corner web-br">🕸️</div>
 
+    <!-- 👻 БАГАТО АНІМОВАНИХ ЖАХАСТИКІВ -->
     <div class="spooky-float bat-1">🦇</div>
     <div class="spooky-float bat-2">🦇</div>
     <div class="spooky-float ghost-1">👻</div>
@@ -420,6 +443,12 @@
     <div class="spooky-float jack-2">🎃</div>
     <div class="spooky-float skel-1">💀</div>
     <div class="spooky-float smile-bg">😈</div>
+    
+    <!-- 🧛‍♂️ НОВІ ЖАХАСТИКИ: Вампіри, Упирі, Зілля, Відьмак -->
+    <div class="spooky-float vampire-1">🧛‍♂️</div>
+    <div class="spooky-float ghoul-1">🧟‍♂️</div>
+    <div class="spooky-float potion-1">🧪</div>
+    <div class="spooky-float witcher-1">🧙‍♂️</div>
 
     <header>
         <h1 class="bloody-title">TRICK OR TREAT 🎃🩸</h1>
