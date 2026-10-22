@@ -671,14 +671,14 @@
                     showBeerWinModal();
                 } else {
                     let discount = "5%";
-                    let encodedCode = "U1BPT0tZNQ=="; // SPOOKY5
+                    let encodedCode = "U1BPT0tZNQ=="; 
 
                     if (sector.id === 'discount7') {
                         discount = "7%";
-                        encodedCode = "VFJJQ0tZNw=="; // TRICKY7
+                        encodedCode = "VFJJQ0tZNw=="; 
                     } else if (sector.id === 'discount10') {
                         discount = "10%";
-                        encodedCode = "VFJFQVQxMA=="; // TREAT10
+                        encodedCode = "VFJFQVQxMA=="; 
                     }
 
                     const promoCode = atob(encodedCode);
